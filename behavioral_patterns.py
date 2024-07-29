@@ -52,3 +52,63 @@ channel.notify("A new video released")
 """ In this case we have multiple Subscribers listening to a single published. But users could also be subscribed to multiple channels.
 Since the Publishers & Subscribers don't have to worry about each others' implementations, they are loosely coupled.
  """
+
+
+""" 
+Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+
+https://refactoring.guru/design-patterns/iterator
+
+Many objects in python have built-in iterators. That's why we can conveniently iterate through an array using the key word in.
+
+myList = [1, 2, 3]
+for n in myList:
+    print(n)
+Output
+1 2 3
+For more complex objects, like Linked Lists or Binary Search Trees, we can define our own iterators.
+
+
+ """
+
+class LinkedNode:
+    def __init__(self, head):
+        self.head = head
+        self.next = None
+
+class LinkedList:
+    def __init__(self, head):
+        self.head = head
+        self.cur = None
+
+    # Define Iterator
+    def __init__(self):
+        self.cur = self.head
+        return self
+    
+    # Iterate
+    def __next__(self):
+        if self.cur:
+            val = self.cur.val
+            self.cur = self.cur.next
+            return val
+        else:
+            raise StopIteration
+        
+
+
+# Initialize LinkedList
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+myList = LinkedList(head)
+
+# Iterate through LinkedList
+for n in myList:
+    print(n) 
+
+""" Output
+
+1 2 3
+ """
+
