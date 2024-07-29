@@ -112,3 +112,60 @@ for n in myList:
 1 2 3
  """
 
+
+""" 
+
+Strategy Pattern
+
+Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+
+https://refactoring.guru/design-patterns/strategy
+
+
+In computer programming, the strategy pattern (also known as the policy pattern) is a behavioral software design pattern that enables selecting an algorithm at runtime. Instead of implementing a single algorithm directly, code receives runtime instructions as to which in a family of algorithms to use.[1]
+
+A Class may have different behaviour, or invoke a different method based on something we define (i.e. a Strategy). For example, we can filter an array by removing positive values; or we could filter it by removing all odd values. These are two filtering strategies we could implement, but we could add many more.
+
+
+ """
+
+from abc import ABC, abstractmethod
+
+class FilterStrategy(ABC):
+
+    @abstractmethod
+    def removeValue(self, val):
+        pass
+
+class RemoveNegativeStrategy(FilterStrategy):
+
+    def removeValue(self, val):
+        return val < 0
+    
+class RemoveOddStrategy(FilterStrategy):
+
+    def removeValue(self, val):
+        return abs(val) % 2
+
+
+class Values():
+    def __init__(self, vals):
+        self.vals = vals
+
+    def filter(self, strategy):
+        res = []
+        for n in self.vals:
+            if not strategy.removeValue(n):
+                res.append(n)
+        return res
+    
+
+values = Values([-7, -4, -1, 0, 2, 6, 9])
+
+print(values.filter(RemoveNegativeStrategy()))
+print(values.filter(RemoveOddStrategy()))
+
+""" Output
+
+[0, 2, 6, 9] [-4, 0, 2, 6]
+A common alternative to this pattern is to simply pass in an inline / lambda function, which allows us to extend the behaviour of a method or class. """
