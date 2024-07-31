@@ -228,3 +228,48 @@ remote.set_command("off", turn_off_cmd)
 
 remote.execute_command("on")  # Output: Light is on
 remote.execute_command("off")  # Output: Light is off
+
+
+""" 
+
+
+
+Template Method Design Pattern
+
+The Template Method design pattern is a behavioral pattern that provides a way to define an algorithm's skeleton in a superclass but allows subclasses to override specific steps of the algorithm. It enables you to define a method that provides a way to perform an algorithm, but allows subclasses to customize certain steps of the algorithm.
+
+ """
+
+from abc import ABC, abstractmethod
+
+class Game(ABC):
+    def play(self):
+        self.initialize()
+        self.start_game()
+        self.end_game()
+
+    @abstractmethod
+    def initialize(self):
+        pass
+
+    @abstractmethod
+    def start_game(self):
+        pass
+
+    @abstractmethod
+    def end_game(self):
+        pass
+
+class ChessGame(Game):
+    def initialize(self):
+        print("Setting up the chess board")
+
+    def start_game(self):
+        print("Starting the chess game")
+
+    def end_game(self):
+        print("Ending the chess game")
+
+class SoccerGame(Game):
+    def initialize(self):
+        print("Setting up the soccer field
