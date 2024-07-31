@@ -169,3 +169,62 @@ print(values.filter(RemoveOddStrategy()))
 
 [0, 2, 6, 9] [-4, 0, 2, 6]
 A common alternative to this pattern is to simply pass in an inline / lambda function, which allows us to extend the behaviour of a method or class. """
+
+
+
+
+""" 
+Command Design Pattern
+
+The Command design pattern is a behavioral pattern that encapsulates a request or action as an object, allowing you to parameterize and queue requests. It enables you to decouple the requester of an action from the provider of the action.
+
+
+ """
+
+class Light:
+    def on(self):
+        print("Light is on")
+
+    def off(self):
+        print("Light is off")
+
+class Command:
+    def __init__(self, light):
+        self.light = light
+
+    def execute(self):
+        pass
+
+class TurnOnCommand(Command):
+    def execute(self):
+        self.light.on()
+
+class TurnOffCommand(Command):
+    def execute(self):
+        self.light.off()
+
+class RemoteControl:
+    def __init__(self):
+        self.commands = {}
+
+    def set_command(self, command_name, command):
+        self.commands[command_name] = command
+
+    def execute_command(self, command_name):
+        if command_name in self.commands:
+            self.commands[command_name].execute()
+        else:
+            print("Invalid command")
+
+# Usage:
+light = Light()
+remote = RemoteControl()
+
+turn_on_cmd = TurnOnCommand(light)
+turn_off_cmd = TurnOffCommand(light)
+
+remote.set_command("on", turn_on_cmd)
+remote.set_command("off", turn_off_cmd)
+
+remote.execute_command("on")  # Output: Light is on
+remote.execute_command("off")  # Output: Light is off
