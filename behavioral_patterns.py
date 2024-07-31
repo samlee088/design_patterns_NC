@@ -272,4 +272,4 @@ class ChessGame(Game):
 
 class SoccerGame(Game):
     def initialize(self):
-        print("Setting up the soccer field
+        print("Setting up the soccer field")
