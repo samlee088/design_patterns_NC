@@ -89,3 +89,45 @@ class MicroToUsbAdapter(UsbCable):
 microToUsbAdapter = MicroToUsbAdapter(MicroUsbCable())
 usbPort2 = UsbPort()
 usbPort2.plug(microToUsbAdapter)
+
+""" Composite
+
+The Composite pattern is a structural pattern because it deals with the composition of objects and how they are structured to form a whole.
+
+The Composite design pattern is a structural pattern that allows clients to treat individual objects and compositions of objects uniformly. It enables you to create a tree-like structure of objects, where each node can be either a leaf node (a single object) or a composite node (a collection of objects). """
+
+class Employee:
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def get_salary(self):
+        return self.salary
+
+class Department:
+    def __init__(self, name):
+        self.name = name
+        self.employees = []
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+
+    def get_salary(self):
+        return sum(employee.get_salary() for employee in self.employees)
+
+# Usage:
+ceo = Employee("CEO", 100000)
+cto = Employee("CTO", 80000)
+dev1 = Employee("Dev1", 60000)
+dev2 = Employee("Dev2", 60000)
+
+it_dept = Department("IT")
+it_dept.add_employee(cto)
+it_dept.add_employee(dev1)
+it_dept.add_employee(dev2)
+
+company = Department("Company")
+company.add_employee(ceo)
+company.add_employee(it_dept)
+
+print(company.get_salary())  # Output: 260000
