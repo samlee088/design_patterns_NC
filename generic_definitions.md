@@ -1,0 +1,3 @@
+Structural patterns: Deal with the composition of objects and how they are structured to form a whole. Examples: Composite, Adapter, Bridge.
+Behavioral patterns: Deal with the interactions between objects and how they behave. Examples: Command, Template Method, Observer.
+Creational patterns: Deal with the creation of objects and how they are instantiated. Examples: Factory, Singleton, Abstract Factory.
